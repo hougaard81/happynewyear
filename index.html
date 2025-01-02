@@ -2,6 +2,7 @@
 <html>
 <head>
     <title>2024 to 2025 Animation - CodeCartel.dk</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         body {
             margin: 0;
@@ -72,13 +73,15 @@
             bottom: -80px;
             left: 50%;
             transform: translateX(-50%);
-            color: #26A9E0;
+            color: #DB256B;
             font-size: 32px;
             font-weight: 700;
+            /* Initial text shadow state */
             text-shadow: 
-                0 2px 8px rgba(38, 169, 224, 0.3),
-                0 1px 2px rgba(38, 169, 224, 0.2);
+                0 2px 8px rgba(224, 38, 131, 0.3),
+                0 1px 2px rgba(224, 38, 162, 0.2);
             z-index: 3;
+            font-family: 'Dosis', sans-serif;
         }
 
         .sparkle {
@@ -207,6 +210,32 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script>
+
+        // Initial entrance animation
+        gsap.from(".company-name", {
+            y: 50,
+            opacity: 0,
+            duration: 1, // Increased duration for smoother entrance
+            ease: "power2.out", // Changed to power2 for smoother easing
+            delay: 0.8
+        });
+
+        // Smoother glow animation
+        gsap.to(".company-name", {
+            textShadow: `
+                0 2px 8px rgba(224, 38, 131, 0.6),
+                0 1px 2px rgba(224, 38, 162, 0.4),
+                0 0 30px rgba(224, 38, 131, 0.3)
+            `,
+            duration: 2,
+            yoyo: true,
+            repeat: -1,
+            ease: "sine.inOut", // Using sine.inOut for smoother transitions
+            stagger: {
+                each: 0.5,
+                from: "start"
+            }
+        });
         // Fireworks setup
         const canvas = document.getElementById('fireworks');
         const ctx = canvas.getContext('2d');
@@ -472,7 +501,7 @@
                 createFirework(x, y);
             }, 300);
 
-            setTimeout(() => clearInterval(fireworksInterval), 2000);
+            setTimeout(() => clearInterval(fireworksInterval), 500);
 
             tl.to("#year2024", {
                 z: 100,
